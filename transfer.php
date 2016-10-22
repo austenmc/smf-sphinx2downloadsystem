@@ -135,8 +135,9 @@ function writeNewDownloads($conn, $downloads, $categoryMapping)
         $name = $d['name'];
         $oldCatId = $d['cat'];
         $newCatId = $categoryMapping[$oldCatId];
+        $newDescription = $d['ddesc'] . '<br><br>Author: ' . $d['author_name'] . ' &lt;' . $d['author_email'] . '&gt;';
         echo "Inserting download oldId={$oldId} title={$name} oldCatId={$oldCatId}...";
-        $stmt->execute([$d['date'], $d['name'], $d['ddesc'], $d['views'], $d['downloads'], $d['filesize'], $d['filename'], $d['filename'], $newCatId]);
+        $stmt->execute([$d['date'], $d['name'], $newDescription, $d['views'], $d['downloads'], $d['filesize'], $d['filename'], $d['filename'], $newCatId]);
         $newId = $conn->lastInsertId();
         echo "newId={$newId} newCatId={$newCatId}\n";
      }
